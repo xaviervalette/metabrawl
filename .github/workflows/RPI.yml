@@ -32,7 +32,7 @@ jobs:
           port: 4243
           script: |
             cd /home/pi/metabrawl
-            rm -R $(ls -I ".env" )
+            find . ! -name '.env' -type f -exec rm -f {} +
         
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
