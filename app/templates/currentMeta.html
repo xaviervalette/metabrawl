@@ -1,0 +1,174 @@
+{% extends 'base.html'%}
+
+{% block body %}
+
+<!-- TITLE OF PAGE -->
+
+{{ macros.header("Current Meta", "Check which team is the best on a given map!", "/") }}
+
+
+{% for i in range(0, len) %}
+{% set map = current_events[i]["event"]["map"] | replace("'", "") | replace("-", "") | upper %}
+{% set mode = current_events[i]["event"]["mode"] | replace("'", "") | replace("-", "") | upper %}
+
+<!-- DIV FOR ONE EVENT -->
+
+{% if mode!="BOSSFIGHT" and mode!="SUPERCITYRAMPAGE" %}
+
+<div class="container col-lg-6 bg-dark text-center my-5 event rounded-3 text-white pb-3"
+  onclick="location.href='/currentMeta/{{i}}'">
+  
+  <h4 class="pt-3">
+    <img src='/static/img/modes/{{mode|upper}}.jpg' alt='{{current_events[i]["event"]["mode"]|upper}}' loading="lazy"
+      style="max-width:20px; min-width:20px;">
+    {{ map }}
+  </h4>
+
+  <div class="row flex-lg-row align-items-center">
+    <div class=" col-md-6 col-lg-8 text-center bg-dark">
+
+      {% if battleNumber[i]!=0 %}
+
+      <!-- TEAM TABLE -->
+
+      {% if (mode!="SOLOSHOWDOWN") %}
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col" class="align-middle" style="width:50%">Team</th>
+            <th scope="col" class="align-middle">Win rate</th>
+            <th scope="col" class="align-middle">Pick rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% if (mode!="DUOSHOWDOWN") %}
+            <td>
+              <ul class="people">
+                <li>
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
+                    class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}'>
+                <li>
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}.JPG'
+                    class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}'>
+                <li>
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][2]}}.JPG'
+                    class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][2]}}'>
+              </ul>
+            </td>
+            {% elif mode=="DUOSHOWDOWN" %}
+            <td>
+              <ul class="people">
+                <li>
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
+                    class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}'>
+                <li>
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}.JPG'
+                    class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}'>
+              </ul>
+            </td>
+            {% endif %}
+            <td class="align-middle">
+              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["winRate"])}}%</p>
+            </td>
+            <td class="align-middle">
+              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["pickRate"])}}%</p>
+            </td>
+            {% endif %}
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- END TABLE -->
+
+      <!-- SOLO TABLE -->
+
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col" class="align-middle" style="width:50%">Brawler</th>
+            <th scope="col" class="align-middle">Win rate</th>
+            <th scope="col" class="align-middle">Pick rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul class="people">
+                <li>
+                  <img src='/static/img/brawlers/{{bestSolo[i][0]["soloStats"]["brawler"]}}.JPG'
+                    class="img-border-small" alt='{{bestSolo[i][0]["soloStats"]["brawler"]}}'>
+              </ul>
+            </td>
+            <td class="align-middle">
+              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["winRate"])}}%</p>
+            </td>
+            <td class="align-middle">
+              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["pickRate"])}}%</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- END TABLE -->
+
+      {% endif %}
+
+      {% if battleNumber[i]!=0 %}
+      <h5>
+        <span class="badge bg-success">
+          {{battleNumber[i]}} battles recorded
+        </span>
+      </h5>
+      {% else %}
+      <h5>
+        <span class="badge bg-danger">
+          No battle recorded yet!
+        </span>
+      </h5>
+      {% endif %}
+
+    </div>
+
+    <!-- MAP DIV -->
+
+    <div class=" col-md-6 col-lg-4 text-center bg-dark">
+      {% if battleNumber[i]!= 0 %}
+      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
+        style="max-width: 200px;min-width: 60%;border-radius:20%;">
+      {% else %}
+      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
+        style="max-width: 200px;min-width: 60%;border-radius:20%;">
+      {% endif %}
+
+      <!-- PROGRESS -->
+  <div class="container pt-2 px-0">
+    <div class="row justify-content-center">
+      <div class="col-8 col-md-12">
+        {% if hours[i]!=0 %}
+        Ends in {{ hours[i] }}h {{ minutes[i] }}m
+        {% else %}
+        Ends in {{ minutes[i] }}m
+        {% endif %}
+    <div class="progress">
+    <div class="progress-bar text-dark" role="progressbar" aria-valuenow="{{ eventProgress[i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ eventProgress[i] }}%;">
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- END PROGRESS -->
+
+    </div>
+
+    <!-- END DIV -->
+
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+
+<!-- END DIV -->
+
+{% endblock body %}

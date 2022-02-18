@@ -1,0 +1,96 @@
+{% macro tag_reader() %}
+  <section class="scrollspy" id="tagreader">
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5" id="tag_reader">
+        <div class="row align-items-center g-lg-5 py-5">
+          <div class="col-lg-7 text-start text-lg-start">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-bookmark-check text-info" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+              </svg>
+              TAG reader tool</h1>
+              <p class="lead mb-4">This tool will give you insights on the player based on his/her battlelogs (past 25 battles), his/her number of brawlers, his/her total number of battles played, his/her club and so on!</p>
+            <img src="/static/img/tag_reader.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          </div>
+          <div class="col-md-10 mx-auto col-lg-5">
+            <form class="p-4 p-md-5 border rounded-3" style="background:#212529" method="POST">
+              <div class="form-floating mb-3">
+                <input type="tag" name="tag" class="form-control" id="tag" placeholder="TAG">
+                <label class="text-light" for="floatingInput">Enter the player's TAG</label>
+              </div>
+              <button class="w-100 btn btn-lg btn-dark" type="submit"  onClick="return empty()">Get stats!</button>
+              <hr class="my-4">
+              <small class="text-muted"><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">If you don't know where to find your TAG, click here</a></small>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Find your TAG</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <b>Step 1: </b>
+        Open the Brawl Stars application and click on the top left button:
+        <img src="/static/img/howtofindtag.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        <br>
+        <b>Step 2: </b>
+        Read the #XXXXX TAG value and use it on the site:
+        <img src="/static/img/howtofindtag-1.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function empty() {
+    var x;
+    x = document.getElementById("tag").value;
+    if (x == "") {
+        alert("Enter a TAG");
+        return false;
+    };
+}
+</script>
+{% endmacro %}
+
+{% macro card(title) %}
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="{{title}}">
+    <div class="card-body">
+      <h5 class="card-title">{{title}}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+  {% endmacro %}
+
+  {% macro header(title, text, back) %}
+
+    <div class="bg-dark text-secondary px-4 pt-5 text-center">
+        <h1 class="display-4 fw-bold text-white">{{title}}</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead">{{text}}</p>
+            <button type="button" class="btn btn-info" onclick="location.href='{{back}}'">&laquo; Back</button>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          </div>
+        </div>
+      </div>
+    {% endmacro %}
