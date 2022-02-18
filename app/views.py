@@ -1,6 +1,11 @@
 from app import app, render_template, request, redirect, url_for
 from app.functions import *
 
+dataPath=os.environ["BRAWL_COACH_DATAPATH"]
+backPath=os.environ["BRAWL_COACH_BACKPATH"]
+frontPath=os.environ["BRAWL_COACH_FRONTPATH"]
+token=os.environ["BRAWL_COACH_TOKEN"]
+
 @app.route("/")
 def homepage():
 	return render_template('home.html')

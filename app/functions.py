@@ -17,10 +17,10 @@ if(platform.system()=="Windows"):
 else:
     path_separator="/"
 
-dataPath="/home/pi/brawlCoach/data"
-backPath="/home/pi/brawlCoach/src/python"
-frontPath="/home/pi/brawlCoach/src/web"
-logPath="/home/pi/brawlCoach/log"
+dataPath=os.environ["BRAWL_COACH_DATAPATH"]
+backPath=os.environ["BRAWL_COACH_BACKPATH"]
+frontPath=os.environ["BRAWL_COACH_FRONTPATH"]
+token=os.environ["BRAWL_COACH_TOKEN"]
 
 """
 READ AND RETURN BRAWL STARS API JSON WEB TOKEN
