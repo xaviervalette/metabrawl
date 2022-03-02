@@ -25,7 +25,7 @@
   </h4>
 
   <div class="row flex-lg-row align-items-center">
-    <div class=" col-md-6 col-lg-8 text-center bg-dark">
+    <div class="col-8 text-center bg-dark">
 
       {% if battleNumber[i]!=0 %}
 
@@ -74,10 +74,10 @@
             <td class="align-middle">
               <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["pickRate"])}}%</p>
             </td>
-            {% endif %}
           </tr>
         </tbody>
       </table>
+      {% endif %}
 
       <!-- END TABLE -->
 
@@ -132,13 +132,13 @@
 
     <!-- MAP DIV -->
 
-    <div class=" col-md-6 col-lg-4 text-center bg-dark">
+    <div class="col-4 text-center bg-dark">
       {% if battleNumber[i]!= 0 %}
       <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
-        style="max-width: 200px;min-width: 60%;border-radius:20%;">
+        style="max-width: 100%;min-width: 100%;border-radius:20%;">
       {% else %}
       <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
-        style="max-width: 200px;min-width: 60%;border-radius:20%;">
+        style="max-width: 100%;min-width: 100%;border-radius:20%;">
       {% endif %}
 
       <!-- PROGRESS -->
