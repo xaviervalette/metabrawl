@@ -18,11 +18,21 @@
 <div class="container col-lg-6 bg-dark text-center my-5 event rounded-3 text-white pb-3"
   onclick="location.href='/currentMeta/{{i}}'">
   
-  <h4 class="pt-3">
+  <h4 class="pt-3 mb-0">
     <img src='/static/img/modes/{{mode|upper}}.jpg' alt='{{current_events[i]["event"]["mode"]|upper}}' loading="lazy"
       style="max-width:20px; min-width:20px;">
     {{ map }}
   </h4>
+
+  {% if battleNumber[i]!=0 %}
+    <span class="badge bg-success mb-3">
+      {{battleNumber[i]}} battles
+    </span>
+  {% else %}
+    <span class="badge bg-danger mb-3">
+      No battle yet!
+    </span>
+  {% endif %}
 
   <div class="row flex-lg-row align-items-center">
     <div class="col-6 col-lg-8 text-center bg-dark">
@@ -112,20 +122,6 @@
 
       <!-- END TABLE -->
 
-      {% endif %}
-
-      {% if battleNumber[i]!=0 %}
-      <h5>
-        <span class="badge bg-success">
-          {{battleNumber[i]}} battles recorded
-        </span>
-      </h5>
-      {% else %}
-      <h5>
-        <span class="badge bg-danger">
-          No battle recorded yet!
-        </span>
-      </h5>
       {% endif %}
 
     </div>
