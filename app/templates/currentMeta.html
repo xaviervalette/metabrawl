@@ -43,7 +43,7 @@
         <tbody>
           <tr>
             {% if (mode!="DUOSHOWDOWN") %}
-            <td>
+            <td class="w-100">
               <ul class="people text-center">
                 <li>
                   <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
@@ -57,7 +57,7 @@
               </ul>
             </td>
             {% elif mode=="DUOSHOWDOWN" %}
-            <td>
+            <td class="w-100">
               <ul class="people text-center">
                 <li>
                   <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
@@ -69,10 +69,10 @@
             </td>
             {% endif %}
             <td data-label="Win Rate" class="align-middle">
-              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["winRate"])}}%</p>
+              <p class="fs-6 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["winRate"])}}%</p>
             </td>
             <td data-label="Pick Rate" class="align-middle">
-              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["pickRate"])}}%</p>
+              <p class="fs-6 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["pickRate"])}}%</p>
             </td>
           </tr>
         </tbody>
@@ -93,7 +93,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>
+            <td class="w-100">
               <ul class="people text-center">
                 <li>
                   <img src='/static/img/brawlers/{{bestSolo[i][0]["soloStats"]["brawler"]}}.JPG'
@@ -101,10 +101,10 @@
               </ul>
             </td>
             <td data-label="Win Rate" class="align-middle">
-              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["winRate"])}}%</p>
+              <p class="fs-6 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["winRate"])}}%</p>
             </td>
             <td data-label="Pick Rate" class="align-middle">
-              <p class="fs-5 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["pickRate"])}}%</p>
+              <p class="fs-6 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["pickRate"])}}%</p>
             </td>
           </tr>
         </tbody>
@@ -142,17 +142,21 @@
       {% endif %}
 
       <!-- PROGRESS -->
+      
+      
   <div class="container pt-2 px-0">
     <div class="row justify-content-center">
-      <div class="col-8 col-md-12">
-        {% if hours[i]!=0 %}
-        Ends in {{ hours[i] }}h {{ minutes[i] }}m
-        {% else %}
-        Ends in {{ minutes[i] }}m
-        {% endif %}
-    <div class="progress">
-    <div class="progress-bar text-dark" role="progressbar" aria-valuenow="{{ eventProgress[i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ eventProgress[i] }}%;">
-    </div>
+      <div class="col-10 col-md-10">
+        <div class="progress position-relative">
+          <div class="progress-bar text-dark" role="progressbar" aria-valuenow="{{ eventProgress[i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ eventProgress[i] }}%;">
+            <small class="justify-content-center d-flex position-absolute w-100">        
+            {% if hours[i]!=0 %}
+            Ends in {{ hours[i] }}h {{ minutes[i] }}m
+            {% else %}
+            Ends in {{ minutes[i] }}m
+            {% endif %}
+          </small>
+      </div>
   </div>
   </div>
   </div>
