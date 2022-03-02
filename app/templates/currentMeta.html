@@ -44,7 +44,7 @@
           <tr>
             {% if (mode!="DUOSHOWDOWN") %}
             <td>
-              <ul class="people">
+              <ul class="people text-center">
                 <li>
                   <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}'>
@@ -57,8 +57,8 @@
               </ul>
             </td>
             {% elif mode=="DUOSHOWDOWN" %}
-            <td data-label="Team">
-              <ul class="people">
+            <td>
+              <ul class="people text-center">
                 <li>
                   <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}'>
@@ -94,7 +94,7 @@
         <tbody>
           <tr>
             <td>
-              <ul class="people">
+              <ul class="people text-center">
                 <li>
                   <img src='/static/img/brawlers/{{bestSolo[i][0]["soloStats"]["brawler"]}}.JPG'
                     class="img-border-small" alt='{{bestSolo[i][0]["soloStats"]["brawler"]}}'>
