@@ -4,6 +4,7 @@ from app.functions import *
 dataPath=os.environ["BRAWL_COACH_DATAPATH"]
 backPath=os.environ["BRAWL_COACH_BACKPATH"]
 frontPath=os.environ["BRAWL_COACH_FRONTPATH"]
+logPath=os.environ["BRAWL_COACH_LOGPATH"]
 token=os.environ["BRAWL_COACH_TOKEN"]
 
 @app.route("/")
