@@ -25,14 +25,14 @@
   </h4>
 
   <div class="row flex-lg-row align-items-center">
-    <div class="col-8 text-center bg-dark">
+    <div class="col-6 col-lg-8 text-center bg-dark">
 
       {% if battleNumber[i]!=0 %}
 
       <!-- TEAM TABLE -->
 
       {% if (mode!="SOLOSHOWDOWN") %}
-      <table class="table table-dark">
+      <table class="table table-dark responsive">
         <thead>
           <tr>
             <th scope="col" class="align-middle" style="width:50%">Team</th>
@@ -43,7 +43,7 @@
         <tbody>
           <tr>
             {% if (mode!="DUOSHOWDOWN") %}
-            <td>
+            <td data-label="Team">
               <ul class="people">
                 <li>
                   <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
@@ -57,7 +57,7 @@
               </ul>
             </td>
             {% elif mode=="DUOSHOWDOWN" %}
-            <td>
+            <td data-label="Team">
               <ul class="people">
                 <li>
                   <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
@@ -68,10 +68,10 @@
               </ul>
             </td>
             {% endif %}
-            <td class="align-middle">
+            <td data-label="Win Rate" class="align-middle">
               <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["winRate"])}}%</p>
             </td>
-            <td class="align-middle">
+            <td data-label="Pick Rate" class="align-middle">
               <p class="fs-5 mb-0">{{"%.1f"|format(100*bestTeams[i][0]["teamStats"]["pickRate"])}}%</p>
             </td>
           </tr>
@@ -83,7 +83,7 @@
 
       <!-- SOLO TABLE -->
 
-      <table class="table table-dark">
+      <table class="table table-dark responsive">
         <thead>
           <tr>
             <th scope="col" class="align-middle" style="width:50%">Brawler</th>
@@ -93,17 +93,17 @@
         </thead>
         <tbody>
           <tr>
-            <td>
+            <td data-label="Brawler">
               <ul class="people">
                 <li>
                   <img src='/static/img/brawlers/{{bestSolo[i][0]["soloStats"]["brawler"]}}.JPG'
                     class="img-border-small" alt='{{bestSolo[i][0]["soloStats"]["brawler"]}}'>
               </ul>
             </td>
-            <td class="align-middle">
+            <td data-label="Win Rate" class="align-middle">
               <p class="fs-5 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["winRate"])}}%</p>
             </td>
-            <td class="align-middle">
+            <td data-label="Pick Rate" class="align-middle">
               <p class="fs-5 mb-0">{{"%.1f"|format(100*bestSolo[i][0]["soloStats"]["pickRate"])}}%</p>
             </td>
           </tr>
@@ -132,7 +132,7 @@
 
     <!-- MAP DIV -->
 
-    <div class="col-4 text-center bg-dark">
+    <div class="col-6 col-lg-4 text-center bg-dark">
       {% if battleNumber[i]!= 0 %}
       <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
         style="max-width: 100%;min-width: 100%;border-radius:20%;">
