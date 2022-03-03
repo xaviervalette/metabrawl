@@ -28,15 +28,15 @@
           <div class="container">
             <ul class="people">
               <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0]}}.JPG'
+                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                   alt='{{bestTeams[i]["teamStats"]["brawlers"][0]}}'
                   style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
               <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1]}}.JPG'
+                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                   alt='{{bestTeams[i]["teamStats"]["brawlers"][1]}}'
                   style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
               <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][2]}}.JPG'
+                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][2] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                   alt='{{bestTeams[i]["teamStats"]["brawlers"][2]}}'
                   style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
             </ul>
@@ -47,11 +47,11 @@
           <div class="container">
             <ul class="people">
               <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0]}}.JPG'
+                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                   alt='{{bestTeams[i]["teamStats"]["brawlers"][0]}}'
                   style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
               <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1]}}.JPG'
+                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                   alt='{{bestTeams[i]["teamStats"]["brawlers"][1]}}'
                   style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
             </ul>
@@ -89,7 +89,7 @@
         <td>
           <div class="container">
             <ul class="people">
-              <img src='/static/img/brawlers/{{bestSolo[i]["soloStats"]["brawler"]}}.JPG'
+              <img src='/static/img/brawlers/{{bestSolo[i]["soloStats"]["brawler"] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                 alt='{{bestSolo[i]["soloStats"]["brawler"]}}' style="max-width:20%; min-width:50px; border-radius:20%"
                 class="img-border-small">
             </ul>

@@ -13,13 +13,13 @@
 
 <!-- DIV FOR ONE EVENT -->
 
-{% if mode!="BOSSFIGHT" and mode!="SUPERCITYRAMPAGE" %}
+{% if mode!="BOSSFIGHT" and mode!="SUPERCITYRAMPAGE" and mode!="BIGGAME" %}
 
 <div class="container col-lg-6 bg-dark text-center my-5 event rounded-3 text-white pb-3"
   onclick="location.href='/currentMeta/{{i}}'">
   
   <h4 class="pt-3 mb-0">
-    <img src='/static/img/modes/{{mode|upper}}.jpg' alt='{{current_events[i]["event"]["mode"]|upper}}' loading="lazy"
+    <img src='/static/img/modes/{{mode|lower}}.jpg' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
       style="max-width:20px; min-width:20px;">
     {{ map }}
   </h4>
@@ -56,13 +56,13 @@
             <td class="w-100">
               <ul class="people text-center">
                 <li>
-                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}'>
                 <li>
-                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}.JPG'
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}'>
                 <li>
-                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][2]}}.JPG'
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][2] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][2]}}'>
               </ul>
             </td>
@@ -70,10 +70,10 @@
             <td class="w-100">
               <ul class="people text-center">
                 <li>
-                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}.JPG'
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][0]}}'>
                 <li>
-                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}.JPG'
+                  <img src='/static/img/brawlers/{{bestTeams[i][0]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                     class="img-border-small" alt='{{bestTeams[i][0]["teamStats"]["brawlers"][1]}}'>
               </ul>
             </td>
@@ -106,7 +106,7 @@
             <td class="w-100">
               <ul class="people text-center">
                 <li>
-                  <img src='/static/img/brawlers/{{bestSolo[i][0]["soloStats"]["brawler"]}}.JPG'
+                  <img src='/static/img/brawlers/{{bestSolo[i][0]["soloStats"]["brawler"] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                     class="img-border-small" alt='{{bestSolo[i][0]["soloStats"]["brawler"]}}'>
               </ul>
             </td>
@@ -130,10 +130,10 @@
 
     <div class="col-6 col-lg-4 text-center bg-dark">
       {% if battleNumber[i]!= 0 %}
-      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
+      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "")}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%;border-radius:20%;">
       {% else %}
-      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "")}}.JPG' class="img-border pe-2" alt=''
+      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "")}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%;border-radius:20%;">
       {% endif %}
 
