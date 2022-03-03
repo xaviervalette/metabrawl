@@ -19,7 +19,7 @@
   onclick="location.href='/currentMeta/{{i}}'">
   
   <h4 class="pt-3 mb-0">
-    <img src='/static/img/modes/{{mode|lower}}.jpg' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
+    <img src='/static/img/modes/{{mode | lower}}.jpg' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
       style="max-width:20px; min-width:20px;">
     {{ map }}
   </h4>
@@ -130,10 +130,10 @@
 
     <div class="col-6 col-lg-4 text-center bg-dark">
       {% if battleNumber[i]!= 0 %}
-      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "")}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+      <img src='/static/img/maps/{{mode | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%;border-radius:20%;">
       {% else %}
-      <img src='/static/img/maps/{{mode}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "")}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+      <img src='/static/img/maps/{{mode | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%;border-radius:20%;">
       {% endif %}
 
