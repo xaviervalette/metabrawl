@@ -29,9 +29,12 @@ sites = ['https://brawlify.com/gamemodes/detail/Duels',
 'https://brawlify.com/gamemodes/detail/Siege',
 'https://brawlify.com/gamemodes/detail/Heist',
 'https://brawlify.com/gamemodes/detail/Super-City-Rampage',
-'https://brawlify.com/gamemodes/detail/Wipeout']
+'https://brawlify.com/gamemodes/detail/Wipeout',
+'https://brawlify.com/gamemodes/detail/Basket-Brawl',
+'https://brawlify.com/gamemodes/detail/Payload',
+]
 
-modes=["DUELS", "HOTZONE", "KNOCKOUT", "GEMGRAB", "SOLOSHOWDOWN", "DUOSHOWDOWN", "BOUNTY", "BRAWLBALL", "SIEGE", "HEIST", "SUPERCITYRAMPAGE", "WIPEOUT"]
+modes=["DUELS", "HOTZONE", "KNOCKOUT", "GEMGRAB", "SOLOSHOWDOWN", "DUOSHOWDOWN", "BOUNTY", "BRAWLBALL", "SIEGE", "HEIST", "SUPERCITYRAMPAGE", "WIPEOUT", "BASKETBRAWL", "PAYLOAD"]
 #site = "https://brawlify.com/gamemodes/detail/Duels"
 i=0
 for site in sites:
