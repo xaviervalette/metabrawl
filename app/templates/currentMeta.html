@@ -35,7 +35,7 @@
   {% endif %}
 
   <div class="row flex-lg-row align-items-center">
-    <div class="col-6 col-lg-8 text-center bg-dark">
+    <div class="col-6 col-md-8 text-center bg-dark">
 
       {% if battleNumber[i]!=0 %}
 
@@ -128,7 +128,7 @@
 
     <!-- MAP DIV -->
 
-    <div class="col-6 col-lg-4 text-center bg-dark">
+    <div class="col-6 col-md-4 text-center bg-dark">
       {% if battleNumber[i]!= 0 %}
       <img src='/static/img/maps/{{mode | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%;border-radius:20%;">
