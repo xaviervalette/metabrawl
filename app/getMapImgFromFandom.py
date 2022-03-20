@@ -2,8 +2,29 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import re
 import json
+import requests
+import os
+import errno
+from dotenv import load_dotenv
 
-url="https://brawlstars.fandom.com/wiki/Crossroads"
+load_dotenv()
+
+dataPath = os.environ["BRAWL_COACH_DATAPATH"]
+frontPath = os.environ["BRAWL_COACH_FRONTPATH"]
+backPath = os.environ["BRAWL_COACH_BACKPATH"]
+logPath = os.environ["BRAWL_COACH_LOGPATH"]
+token = os.environ["BRAWL_COACH_TOKEN"]
+currentBattlePath = dataPath+"/battles/current"
+allBattlePath = dataPath+"/battles/all"
+webImgPath = frontPath+"/app/static/img"
+
+
+baseUrl = "https://brawlstars.fandom.com/wiki"
+url=f"{baseUrl}/Crossroads"
+
+"""
+GET MAPS PER MODES TABLE
+"""
 mapsPerModesDict = {}
 req = Request(url)
 html_page = urlopen(req)
@@ -37,15 +58,31 @@ with open('mapsPerModes.json', 'w') as json_file:
   json.dump(mapsPerModesDict, json_file, indent=4)
 
 
+"""
+GET MAP IMAGES
+"""
+for mode in mapsPerModesDict:
+    for map in mapsPerModesDict[mode]:
+        print(map)
+        imgUrl=f"{baseUrl}/{map.replace(' ', '_')}"
+        print(imgUrl)
 
-for link in soup.findAll('a'):
-    links.append(link.get('href'))
-
-imgLinks = []
-for link in links:
-    try:
-        if("/wiki/" in link):
-            imgLinks.append(link)
-    except:
-        print("Error")
-#print(imgLinks)
+        try:
+            response = requests.get(imgUrl)
+            req = Request(imgUrl)
+            html_page = urlopen(req)
+            soup = BeautifulSoup(html_page, "lxml")
+            imgHtml=soup.findAll("img")
+            print(imgHtml[1]["src"])
+            filePath = f"{webImgPath}/maps/{mode.replace(' ','').lower()}/{map.replace(' ', '').replace('-', '').replace('.', '').lower()}.png"
+            if not os.path.exists(os.path.dirname(filePath)):
+                try:
+                    os.makedirs(os.path.dirname(filePath))
+                except OSError as exc: # Guard against race condition
+                    if exc.errno != errno.EEXIST:
+                        raise
+            with open(filePath, 'wb') as f:
+                response = requests.get(imgHtml[2]["src"])
+                f.write(response.content)
+        except:
+            print("ERROR")

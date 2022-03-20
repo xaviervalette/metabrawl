@@ -17,25 +17,15 @@
 
 <div class="container col-lg-6 bg-dark text-center my-5 event rounded-3 text-white pb-3"
   onclick="location.href='/currentMeta/{{i}}'">
-  
+
   <h4 class="pt-3 mb-0">
-    <img src='/static/img/maps/{{mode | lower}}/{{mode | lower}}.png' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
+    <img src='/static/img/modes/{{mode | lower}}.png' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
       style="max-width:20px; min-width:20px;">
     {{ map }}
   </h4>
 
-  {% if battleNumber[i]!=0 %}
-    <span class="badge bg-success mb-3">
-      {{battleNumber[i]}} battles
-    </span>
-  {% else %}
-    <span class="badge bg-danger mb-3">
-      No battle yet!
-    </span>
-  {% endif %}
-
   <div class="row flex-lg-row align-items-center">
-    <div class="col-6 col-md-8 text-center bg-dark">
+    <div class="col-7 col-md-9 text-center bg-dark">
 
       {% if battleNumber[i]!=0 %}
 
@@ -124,17 +114,27 @@
 
       {% endif %}
 
+      {% if battleNumber[i]!=0 %}
+      <span class="badge bg-success mb-3 mt-2">
+        {{battleNumber[i]}} battles
+      </span>
+    {% else %}
+      <span class="badge bg-danger mb-3 mt-2">
+        No battle yet!
+      </span>
+    {% endif %}
+
     </div>
 
     <!-- MAP DIV -->
 
-    <div class="col-6 col-md-4 text-center bg-dark">
+    <div class="col-5 col-md-3 text-center bg-dark ps-0 pe-1">
       {% if battleNumber[i]!= 0 %}
-      <img src='/static/img/maps/{{mode | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
-        style="max-width: 100%;min-width: 100%;border-radius:20%;">
+      <img src='/static/img/maps/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+        style="max-width: 100%;min-width: 100%">
       {% else %}
-      <img src='/static/img/maps/{{mode | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
-        style="max-width: 100%;min-width: 100%;border-radius:20%;">
+      <img src='/static/img/maps/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+        style="max-width: 100%;min-width: 100%">
       {% endif %}
 
       <!-- PROGRESS -->
