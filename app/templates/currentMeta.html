@@ -130,10 +130,10 @@
 
     <div class="col-5 col-md-3 text-center bg-dark ps-0 pe-1">
       {% if battleNumber[i]!= 0 %}
-      <img src='/static/img/maps/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+      <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%">
       {% else %}
-      <img src='/static/img/maps/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+      <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%">
       {% endif %}
 

@@ -74,7 +74,7 @@ for mode in mapsPerModesDict:
             soup = BeautifulSoup(html_page, "lxml")
             imgHtml=soup.findAll("img")
             print(imgHtml[1]["src"])
-            filePath = f"{webImgPath}/maps/{mode.replace(' ','').lower()}/{map.replace(' ', '').replace('-', '').replace('.', '').lower()}.png"
+            filePath = f"{webImgPath}/maps/originalImg/{mode.replace(' ','').lower()}/{map.replace(' ', '').replace('-', '').replace('.', '').lower()}.png"
             if not os.path.exists(os.path.dirname(filePath)):
                 try:
                     os.makedirs(os.path.dirname(filePath))
