@@ -5,107 +5,142 @@
 <!-- TITLE OF PAGE -->
 {{ macros.header(map|upper, mode|upper, "/currentMeta") }}
 
-<div class="col-lg-6 mx-auto my-5">
-{% if mode|upper != "SOLOSHOWDOWN" %}
-<!-- TEAM TABLE -->
-  <table id="footable" class="table text-white" data-sorting="true" data-paging="true" data-paging-size="5"
-    data-paging-limit="3">
-    <thead class="table-dark">
-      <tr class="item">
-        <th scope="col" class="align-middle" data-sortable="false" style="width: 50%;">Brawlers</th>
-        <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Win Rate</th>
-        <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Pick Rate</th>
-        <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Wins</th>
-        <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Games
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for i in range(0, lenTeams) %}
-      <tr>
-        {% if mode|upper != "DUOSHOWDOWN" %}
-        <td>
-          <div class="container">
-            <ul class="people">
-              <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
-                  alt='{{bestTeams[i]["teamStats"]["brawlers"][0]}}'
-                  style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
-              <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
-                  alt='{{bestTeams[i]["teamStats"]["brawlers"][1]}}'
-                  style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
-              <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][2] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
-                  alt='{{bestTeams[i]["teamStats"]["brawlers"][2]}}'
-                  style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
-            </ul>
-          </div>
-        </td>
-        {% else %}
-        <td>
-          <div class="container">
-            <ul class="people">
-              <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
-                  alt='{{bestTeams[i]["teamStats"]["brawlers"][0]}}'
-                  style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
-              <li>
-                <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
-                  alt='{{bestTeams[i]["teamStats"]["brawlers"][1]}}'
-                  style="max-width:20%; min-width:50px; border-radius:20%" class="img-border-small">
-            </ul>
-          </div>
-        </td>
+<main class="container">
+
+  <div class="row">
+    <div class="col-lg-8 text-center">
+
+      <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="soloButton" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="soloButton">SOLO</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="teamButton" autocomplete="off">
+        <label class="btn btn-outline-primary" for="teamButton">TEAM</label>
+      
+      </div>
+      <div class="container bg-dark text-center my-5 event rounded-3 text-white pb-3" id="teamDiv" style="display:none">
+
+
+
+      {% if mode|upper != "SOLOSHOWDOWN" %}
+      <!-- TEAM TABLE -->
+        <table id="footable" class="table text-white" data-sorting="true" data-paging="false" data-paging-size="5"
+          data-paging-limit="3">
+          <thead class="table-dark">
+            <tr class="item">
+              <th scope="col" class="text-center" data-sortable="false" style="width: 50%;">Brawlers</th>
+              <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Win Rate</th>
+              <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Pick Rate</th>
+              <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Wins</th>
+              <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Games
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in range(0, lenTeams) %}
+            <tr>
+              {% if mode|upper != "DUOSHOWDOWN" %}
+              <td>
+                <div class="container">
+                  <ul class="people text-center">
+                    <li>
+                      <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
+                        alt='{{bestTeams[i]["teamStats"]["brawlers"][0]}}'
+                        class="img-border-small">
+                    <li>
+                      <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
+                        alt='{{bestTeams[i]["teamStats"]["brawlers"][1]}}'
+                        class="img-border-small">
+                    <li>
+                      <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][2] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
+                        alt='{{bestTeams[i]["teamStats"]["brawlers"][2]}}'
+                        class="img-border-small">
+                  </ul>
+                </div>
+              </td>
+              {% else %}
+              <td>
+                <div class="container">
+                  <ul class="people text-center">
+                    <li>
+                      <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
+                        alt='{{bestTeams[i]["teamStats"]["brawlers"][0]}}'
+                        class="img-border-small">
+                    <li>
+                      <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][1] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
+                        alt='{{bestTeams[i]["teamStats"]["brawlers"][1]}}'
+                        class="img-border-small">
+                  </ul>
+                </div>
+              </td>
+              {% endif %}
+              <td class="align-middle">{{"%.1f"|format(100*bestTeams[i]["teamStats"]["winRate"])}}%</td>
+              <td class="align-middle">{{"%.1f"|format(100*bestTeams[i]["teamStats"]["pickRate"])}}%</td>
+              <td class="align-middle">{{bestTeams[i]["teamStats"]["winNumber"]}}</td>
+              <td class="align-middle">{{bestTeams[i]["teamStats"]["pickNumber"]}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
         {% endif %}
-        <td class="align-middle">{{"%.1f"|format(100*bestTeams[i]["teamStats"]["winRate"])}}%</td>
-        <td class="align-middle">{{"%.1f"|format(100*bestTeams[i]["teamStats"]["pickRate"])}}%</td>
-        <td class="align-middle">{{bestTeams[i]["teamStats"]["winNumber"]}}</td>
-        <td class="align-middle">{{bestTeams[i]["teamStats"]["pickNumber"]}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% endif %}
-  <!-- END OF TABLE -->
+        <!-- END OF TABLE -->    
+
+        </div>
+
+        <div class="container bg-dark text-center my-5 event rounded-3 text-white pb-3" id="soloDiv">
+
+      
+        <!-- SOLO TABLE -->
+        <table id="footable" class="table text-white" data-sorting="true" data-paging="false" data-paging-size="5"
+          data-paging-limit="3">
+          <thead class="table-dark">
+            <tr class="item">
+              <th scope="col" class="text-center" data-sortable="false" style="width: 50%;">Brawlers</th>
+              <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Win Rate</th>
+              <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Pick Rate</th>
+              <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Wins</th>
+              <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Games
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in range(0, lenSolo) %}
+            <tr>
+              <td>
+                <div class="container">
+                  <ul class="people text-center">
+                    <img src='/static/img/brawlers/{{bestSolo[i]["soloStats"]["brawler"] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
+                      alt='{{bestSolo[i]["soloStats"]["brawler"]}}' 
+                      class="img-border-small">
+                  </ul>
+                </div>
+              </td>
+              <td class="align-middle">{{"%.1f"|format(100*bestSolo[i]["soloStats"]["winRate"])}}%</td>
+              <td class="align-middle">{{"%.1f"|format(100*bestSolo[i]["soloStats"]["pickRate"])}}%</td>
+              <td class="align-middle">{{bestSolo[i]["soloStats"]["winNumber"]}}</td>
+              <td class="align-middle">{{bestSolo[i]["soloStats"]["pickNumber"]}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- END OF TABLE -->
+
+      </div>
 
 
-  <!-- SOLO TABLE -->
-  <table id="footable" class="table text-white" data-sorting="true" data-paging="true" data-paging-size="5"
-    data-paging-limit="3">
-    <thead class="table-dark">
-      <tr class="item">
-        <th scope="col" class="align-middle" data-sortable="false" style="width: 50%;">Brawlers</th>
-        <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Win Rate</th>
-        <th scope="col" data-type="number" data-formatter="percentage_format" class="align-middle">Pick Rate</th>
-        <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Wins</th>
-        <th scope="col" data-type="number" data-sort-initial="true" class="align-middle" data-breakpoints="xs">Games
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for i in range(0, lenSolo) %}
-      <tr>
-        <td>
-          <div class="container">
-            <ul class="people">
-              <img src='/static/img/brawlers/{{bestSolo[i]["soloStats"]["brawler"] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
-                alt='{{bestSolo[i]["soloStats"]["brawler"]}}' style="max-width:20%; min-width:50px; border-radius:20%"
-                class="img-border-small">
-            </ul>
-          </div>
-        </td>
-        <td class="align-middle">{{"%.1f"|format(100*bestSolo[i]["soloStats"]["winRate"])}}%</td>
-        <td class="align-middle">{{"%.1f"|format(100*bestSolo[i]["soloStats"]["pickRate"])}}%</td>
-        <td class="align-middle">{{bestSolo[i]["soloStats"]["winNumber"]}}</td>
-        <td class="align-middle">{{bestSolo[i]["soloStats"]["pickNumber"]}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
 
-<!-- END OF TABLE -->
+
+
+    </div>
+
+    <div class="col-6 col-lg-4 mx-auto pb-5">
+      <div class="position-sticky" style="top: 2rem;">
+        <img src='/static/img/maps/borderImg/{{mode | upper | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="" alt='MAP IMAGE NOT AVAILABLE NOW'
+style="width:100%; max-height:50%">
+      </div>
+    </div>
+  </div>
+  </main>
 
 <script>
   jQuery(function ($) {
@@ -126,6 +161,23 @@
   function percentage_format(value) {
     return value + '%';
   }
+
+
+const soloDiv = document.getElementById("soloDiv");
+const soloButton = document.getElementById("soloButton");
+soloButton.onclick = function () {
+  teamDiv.style.display = "none";
+  soloDiv.style.display = "block";
+};
+
+const teamDiv = document.getElementById("teamDiv");
+teamDiv.style.display = "none";
+
+const teamButton = document.getElementById("teamButton");
+teamButton.onclick = function () {
+    teamDiv.style.display = "block";
+    soloDiv.style.display = "none";
+};
 </script>
 
 {% endblock body %}

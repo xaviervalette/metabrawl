@@ -4,7 +4,7 @@
 
 <!-- TITLE OF PAGE -->
 
-{{ macros.header("Current Meta", "Check which team is the best on a given map!", "/") }}
+{{ macros.header("Current Meta","", "/") }}
 
 
 {% for i in range(0, len) %}
@@ -18,7 +18,7 @@
 <div class="container col-lg-6 bg-dark text-center my-5 event rounded-3 text-white pb-3"
   onclick="location.href='/currentMeta/{{i}}'">
 
-  <h4 class="pt-3 mb-0">
+  <h4 class="pt-3 mb-2">
     <img src='/static/img/modes/{{mode | lower}}.png' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
       style="max-width:20px; min-width:20px;">
     {{ map }}
@@ -128,12 +128,12 @@
 
     <!-- MAP DIV -->
 
-    <div class="col-5 col-md-3 text-center bg-dark ps-0 pe-1">
+    <div class="col-5 col-md-3 text-center bg-dark ps-0">
       {% if battleNumber[i]!= 0 %}
-      <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+      <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%">
       {% else %}
-      <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="img-border pe-2" alt='MAP IMAGE NOT AVAILABLE NOW'
+      <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%">
       {% endif %}
 

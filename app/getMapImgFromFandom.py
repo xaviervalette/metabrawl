@@ -72,8 +72,7 @@ for mode in mapsPerModesDict:
             req = Request(imgUrl)
             html_page = urlopen(req)
             soup = BeautifulSoup(html_page, "lxml")
-            imgHtml=soup.findAll("img")
-            print(imgHtml[1]["src"])
+            imgHtml=soup.findAll("img", {"class": "pi-image-thumbnail"})
             filePath = f"{webImgPath}/maps/originalImg/{mode.replace(' ','').lower()}/{map.replace(' ', '').replace('-', '').replace('.', '').lower()}.png"
             if not os.path.exists(os.path.dirname(filePath)):
                 try:
@@ -82,7 +81,8 @@ for mode in mapsPerModesDict:
                     if exc.errno != errno.EEXIST:
                         raise
             with open(filePath, 'wb') as f:
-                response = requests.get(imgHtml[2]["src"])
+                mapImgUrl = imgHtml[0]["src"]
+                response = requests.get(mapImgUrl)
                 f.write(response.content)
         except:
             print("ERROR")
