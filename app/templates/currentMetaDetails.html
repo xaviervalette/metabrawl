@@ -41,7 +41,7 @@
             <tr>
               {% if mode|upper != "DUOSHOWDOWN" %}
               <td>
-                <div class="container">
+                <div class="container px-0">
                   <ul class="people text-center">
                     <li>
                       <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
@@ -60,7 +60,7 @@
               </td>
               {% else %}
               <td>
-                <div class="container">
+                <div class="container px-0">
                   <ul class="people text-center">
                     <li>
                       <img src='/static/img/brawlers/{{bestTeams[i]["teamStats"]["brawlers"][0] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
@@ -107,7 +107,7 @@
             {% for i in range(0, lenSolo) %}
             <tr>
               <td>
-                <div class="container">
+                <div class="container px-0">
                   <ul class="people text-center">
                     <img src='/static/img/brawlers/{{bestSolo[i]["soloStats"]["brawler"] | replace(" ","") | replace(".", "") | replace("-", "") | lower}}.png'
                       alt='{{bestSolo[i]["soloStats"]["brawler"]}}' 
@@ -136,7 +136,7 @@
     <div class="col-6 col-lg-4 mx-auto pb-5">
       <div class="position-sticky" style="top: 2rem;">
         <img src='/static/img/maps/borderImg/{{mode | upper | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="" alt='MAP IMAGE NOT AVAILABLE NOW'
-style="width:100%; max-height:50%">
+style="max-width:100%; max-height:500px">
       </div>
     </div>
   </div>
