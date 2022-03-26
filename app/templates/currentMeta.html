@@ -20,8 +20,10 @@
 
   <h4 class="pt-3 mb-2">
     <img src='/static/img/modes/{{mode | lower}}.png' alt='{{current_events[i]["event"]["mode"]}}' loading="lazy"
-      style="max-width:20px; min-width:20px;">
-    {{ map }}
+      style="max-width:30px; min-width:30px;">
+      <span class="align-middle">
+        {{ map }}
+      </span>
   </h4>
 
   <div class="row flex-lg-row align-items-center">
@@ -114,21 +116,22 @@
 
       {% endif %}
 
-      {% if battleNumber[i]!=0 %}
-      <span class="badge bg-success mb-3 mt-2">
-        {{battleNumber[i]}} battles
-      </span>
-    {% else %}
-      <span class="badge bg-danger mb-3 mt-2">
-        No battle yet!
-      </span>
-    {% endif %}
-
     </div>
 
     <!-- MAP DIV -->
 
     <div class="col-5 col-md-3 text-center bg-dark ps-0">
+
+      {% if battleNumber[i]!=0 %}
+      <span class="badge bg-success mb-1">
+        {{battleNumber[i]}} battles
+      </span>
+    {% else %}
+      <span class="badge bg-danger mb-1">
+        No battle yet!
+      </span>
+    {% endif %}
+
       {% if battleNumber[i]!= 0 %}
       <img src='/static/img/maps/borderImg/{{mode | replace("SOLO", "") | replace("DUO", "") | lower}}/{{map | replace (" ", "") | replace (":", "") | replace (".", "") | lower}}.png' class="" alt='MAP IMAGE NOT AVAILABLE NOW'
         style="max-width: 100%;min-width: 100%">

@@ -8,17 +8,19 @@
 <main class="container">
 
   <div class="row">
-    <div class="col-lg-8 text-center">
 
-      <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
+    <div class="col-lg-8 text-center">
+      {% if mode|upper != "SOLOSHOWDOWN" %}
+      <div class="btn-group btn-group-lg mb-3" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check" name="btnradio" id="soloButton" autocomplete="off" checked>
         <label class="btn btn-outline-primary" for="soloButton">SOLO</label>
       
         <input type="radio" class="btn-check" name="btnradio" id="teamButton" autocomplete="off">
         <label class="btn btn-outline-primary" for="teamButton">TEAM</label>
-      
       </div>
-      <div class="container bg-dark text-center my-5 event rounded-3 text-white pb-3" id="teamDiv" style="display:none">
+      {% endif %}
+
+      <div class="container bg-dark text-center mb-5 event rounded-3 text-white pb-3" id="teamDiv" style="display:none">
 
 
 
@@ -87,7 +89,7 @@
 
         </div>
 
-        <div class="container bg-dark text-center my-5 event rounded-3 text-white pb-3" id="soloDiv">
+        <div class="container bg-dark text-center mb-5 event rounded-3 text-white pb-3" id="soloDiv">
 
       
         <!-- SOLO TABLE -->
