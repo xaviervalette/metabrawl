@@ -192,7 +192,7 @@ const metaDiv = document.getElementById("metaDiv");
 const soloButton = document.getElementById("currentButton");
 const normalLength = 8
 soloButton.onclick = function () {
-  if (metaDiv.length > normalLength)
+  if (metaDiv.children.length > normalLength)
   {
   metaDiv.children.slice(0, normalLength).style.display = "block";
   metaDiv.children.slice(normalLength+1, metaDiv.length).style.display = "none";
@@ -207,7 +207,7 @@ soloButton.onclick = function () {
 const teamButton = document.getElementById("championshipButton");
 
 teamButton.onclick = function () {
-  if (metaDiv.length > normalLength)
+  if (metaDiv.children.length > normalLength)
   {
   metaDiv.children.slice(0, normalLength).style.display = "none";
   metaDiv.children.slice(normalLength+1, metaDiv.length).style.display = "block";
