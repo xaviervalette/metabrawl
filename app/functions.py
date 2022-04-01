@@ -63,9 +63,15 @@ def getCurrentEvents(token):
 READ AND RETURN BRAWL STARS CURRENT EVENTS
 """
 def readCurrentEvents(filepath):
+    events = {}
     with open(dataPath+'/events/current_events.json') as f:
         current_events=json.load(f)
-    return current_events
+    currentEvents = current_events
+    championshipEvents = current_events[11:]
+    events["current"]=currentEvents
+    events["championship"]=championshipEvents
+
+    return events
 
 """
 DELETE OUTDATED EVENT FILES

@@ -6,7 +6,19 @@
 
 {{ macros.header(title,"", "/") }}
 
+<div class="col-lg-12 text-center">
 
+  <div class="btn-group btn-group-lg mb-3" role="group" aria-label="Basic radio toggle button group">
+    <input type="radio" class="btn-check" name="btnradio" id="currentButton" autocomplete="off" checked>
+    <label class="btn btn-outline-primary" for="currentButton">Current</label>
+  
+    <input type="radio" class="btn-check" name="btnradio" id="championshipButton" autocomplete="off">
+    <label class="btn btn-outline-primary" for="championshipButton">Championship</label>
+  </div>
+  
+  </div>
+
+  <div id="metaDiv" class="col-lg-12 text-center">
 {% for i in range(0, len) %}
 {% set map = current_events[i]["event"]["map"] | replace("'", "") | replace("-", "") | upper %}
 {% set mode = current_events[i]["event"]["mode"] | replace("'", "") | replace("-", "") | upper %}
@@ -171,7 +183,40 @@
 </div>
 {% endif %}
 {% endfor %}
-
+</div>
 <!-- END DIV -->
+
+<script>
+
+const metaDiv = document.getElementById("metaDiv");
+const soloButton = document.getElementById("currentButton");
+const normalLength = 8
+soloButton.onclick = function () {
+  if (metaDiv.length > normalLength)
+  {
+  metaDiv.children.slice(0, normalLength).style.display = "block";
+  metaDiv.children.slice(normalLength+1, metaDiv.length).style.display = "none";
+  }
+  else
+  {
+  metaDiv.style.display = "block"
+  }
+
+};
+
+const teamButton = document.getElementById("championshipButton");
+
+teamButton.onclick = function () {
+  if (metaDiv.length > normalLength)
+  {
+  metaDiv.children.slice(0, normalLength).style.display = "none";
+  metaDiv.children.slice(normalLength+1, metaDiv.length).style.display = "block";
+  }
+  else
+  {
+    metaDiv.style.display = "none"
+  }
+};
+</script>
 
 {% endblock body %}

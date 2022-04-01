@@ -1,4 +1,4 @@
-from app import app, render_template, request, redirect, url_for
+from app import app, render_template, request, redirect, url_for, abort
 from app.functions import *
 
 dataPath=os.environ["BRAWL_COACH_DATAPATH"]
@@ -11,91 +11,50 @@ token=os.environ["BRAWL_COACH_TOKEN"]
 def homepage():
 	return render_template('home.html')
 
-@app.route("/championshipMeta")
-def championshipMeta():
-	battleNumber={}
-	bestTeams={}
-	bestSolo={}
-	progress={}
-	remainTime={}
-	hours={}
-	minutes={}
-	i=0
-	current_events = readCurrentEvents(dataPath+"/events/current_events.json")
-	championshipEvents = current_events[11:]
-	for events in championshipEvents:
-		map=events["event"]["map"]
-		mode=events["event"]["mode"]
-		startTime=events["startTime"].split(".")[0]
-		_, _, progress[i], remainTime[i]=computeEventTime(events)
-		hours[i], minutes[i], _ = convert_timedelta(remainTime[i])
-		try:
-			bestTeamsRaw, battleNum =readEventsStats(events, "teams")
-			bestSoloRaw, battleNum =readEventsStats(events, "solo")
+@app.route("/meta/<string:metaType>")
+def team_picker(metaType):
+	metaTypeAllowed = ["current", "championship"]
+	if metaType in metaTypeAllowed:
+		battleNumber={}
+		bestTeams={}
+		bestSolo={}
+		progress={}
+		remainTime={}
+		hours={}
+		minutes={}
+		i=0
+		current_events = readCurrentEvents(dataPath+"/events/current_events.json")
+		current_events = current_events[metaType]
 
-			bestTeamsSorted = sorted(bestTeamsRaw, key=lambda d: d['teamStats']["pickRate"], reverse=True)
-			bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
-			
-			bestTeams[i]=bestTeamsSorted
-			bestSolo[i]=bestSoloSorted
-
-			battleNumber[i]=battleNum
-		except:
+		for events in current_events:
+			_, _, progress[i], remainTime[i]=computeEventTime(events)
+			hours[i], minutes[i], _ = convert_timedelta(remainTime[i])
 			try:
+				bestTeamsRaw, battleNum =readEventsStats(events, "teams")
 				bestSoloRaw, battleNum =readEventsStats(events, "solo")
+
+				bestTeamsSorted = sorted(bestTeamsRaw, key=lambda d: d['teamStats']["pickRate"], reverse=True)
 				bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
+				
+				bestTeams[i]=bestTeamsSorted
 				bestSolo[i]=bestSoloSorted
+
 				battleNumber[i]=battleNum
 			except:
-				battleNumber[i]=0
-				bestTeams[i]="N/A"
-		i=i+1			
-	return render_template('currentMeta.html', title="Championship", current_events=championshipEvents, len=len(championshipEvents), battleNumber=battleNumber, bestTeams=bestTeams, bestSolo=bestSolo, eventProgress=progress, hours=hours, minutes=minutes)
+				try:
+					bestSoloRaw, battleNum =readEventsStats(events, "solo")
+					bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
+					bestSolo[i]=bestSoloSorted
+					battleNumber[i]=battleNum
+				except:
+					battleNumber[i]=0
+					bestTeams[i]="N/A"
+			i=i+1			
+		return render_template('currentMeta.html', title="Meta", current_events=current_events, len=len(current_events), battleNumber=battleNumber, bestTeams=bestTeams, bestSolo=bestSolo, eventProgress=progress, hours=hours, minutes=minutes)
+	else:
+		abort(404)
 
-
-@app.route("/currentMeta")
-def team_picker():
-	battleNumber={}
-	bestTeams={}
-	bestSolo={}
-	progress={}
-	remainTime={}
-	hours={}
-	minutes={}
-	i=0
-	current_events = readCurrentEvents(dataPath+"/events/current_events.json")
-	current_events = current_events[0:10]
-
-	for events in current_events:
-		map=events["event"]["map"]
-		mode=events["event"]["mode"]
-		startTime=events["startTime"].split(".")[0]
-		_, _, progress[i], remainTime[i]=computeEventTime(events)
-		hours[i], minutes[i], _ = convert_timedelta(remainTime[i])
-		try:
-			bestTeamsRaw, battleNum =readEventsStats(events, "teams")
-			bestSoloRaw, battleNum =readEventsStats(events, "solo")
-
-			bestTeamsSorted = sorted(bestTeamsRaw, key=lambda d: d['teamStats']["pickRate"], reverse=True)
-			bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
-			
-			bestTeams[i]=bestTeamsSorted
-			bestSolo[i]=bestSoloSorted
-
-			battleNumber[i]=battleNum
-		except:
-			try:
-				bestSoloRaw, battleNum =readEventsStats(events, "solo")
-				bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
-				bestSolo[i]=bestSoloSorted
-				battleNumber[i]=battleNum
-			except:
-				battleNumber[i]=0
-				bestTeams[i]="N/A"
-		i=i+1			
-	return render_template('currentMeta.html', title="Current", current_events=current_events, len=len(current_events), battleNumber=battleNumber, bestTeams=bestTeams, bestSolo=bestSolo, eventProgress=progress, hours=hours, minutes=minutes)
-
-@app.route("/currentMeta/<string:events>")
+@app.route("/meta/<string:events>")
 def mode_map(events):
 	current_events = readCurrentEvents(dataPath+"/events/current_events.json")
 	current_event=current_events[int(events)]
@@ -125,6 +84,10 @@ def processTime():
 	except:
 		timeLog=[]
 	return {"items": timeLog}
+
+@app.errorhandler(404)
+def page_not_found(error):
+   return render_template('notFound.html', title = '404'), 404
 
 
 if __name__ == "__main__":
