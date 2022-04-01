@@ -73,7 +73,8 @@ for mode in mapsPerModesDict:
             html_page = urlopen(req)
             soup = BeautifulSoup(html_page, "lxml")
             imgHtml=soup.findAll("img", {"class": "pi-image-thumbnail"})
-            filePath = f"{webImgPath}/maps/originalImg/{mode.replace(' ','').lower()}/{map.replace(' ', '').replace('-', '').replace('.', '').replace(':', '').lower()}.png"
+            specialChar='\''
+            filePath = f"{webImgPath}/maps/originalImg/{mode.replace(' ','').lower()}/{map.replace(' ', '').replace('-', '').replace('.', '').replace(':', '').replace(specialChar, '').lower()}.png"
             if not os.path.exists(os.path.dirname(filePath)):
                 try:
                     os.makedirs(os.path.dirname(filePath))

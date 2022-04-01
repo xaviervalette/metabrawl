@@ -11,6 +11,48 @@ token=os.environ["BRAWL_COACH_TOKEN"]
 def homepage():
 	return render_template('home.html')
 
+@app.route("/championshipMeta")
+def championshipMeta():
+	battleNumber={}
+	bestTeams={}
+	bestSolo={}
+	progress={}
+	remainTime={}
+	hours={}
+	minutes={}
+	i=0
+	current_events = readCurrentEvents(dataPath+"/events/current_events.json")
+	championshipEvents = current_events[11:]
+	for events in championshipEvents:
+		map=events["event"]["map"]
+		mode=events["event"]["mode"]
+		startTime=events["startTime"].split(".")[0]
+		_, _, progress[i], remainTime[i]=computeEventTime(events)
+		hours[i], minutes[i], _ = convert_timedelta(remainTime[i])
+		try:
+			bestTeamsRaw, battleNum =readEventsStats(events, "teams")
+			bestSoloRaw, battleNum =readEventsStats(events, "solo")
+
+			bestTeamsSorted = sorted(bestTeamsRaw, key=lambda d: d['teamStats']["pickRate"], reverse=True)
+			bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
+			
+			bestTeams[i]=bestTeamsSorted
+			bestSolo[i]=bestSoloSorted
+
+			battleNumber[i]=battleNum
+		except:
+			try:
+				bestSoloRaw, battleNum =readEventsStats(events, "solo")
+				bestSoloSorted = sorted(bestSoloRaw, key=lambda d: d['soloStats']["pickRate"], reverse=True)
+				bestSolo[i]=bestSoloSorted
+				battleNumber[i]=battleNum
+			except:
+				battleNumber[i]=0
+				bestTeams[i]="N/A"
+		i=i+1			
+	return render_template('currentMeta.html', title="Championship", current_events=championshipEvents, len=len(championshipEvents), battleNumber=battleNumber, bestTeams=bestTeams, bestSolo=bestSolo, eventProgress=progress, hours=hours, minutes=minutes)
+
+
 @app.route("/currentMeta")
 def team_picker():
 	battleNumber={}
@@ -22,6 +64,8 @@ def team_picker():
 	minutes={}
 	i=0
 	current_events = readCurrentEvents(dataPath+"/events/current_events.json")
+	current_events = current_events[0:10]
+
 	for events in current_events:
 		map=events["event"]["map"]
 		mode=events["event"]["mode"]
@@ -49,7 +93,7 @@ def team_picker():
 				battleNumber[i]=0
 				bestTeams[i]="N/A"
 		i=i+1			
-	return render_template('currentMeta.html', current_events=current_events, len=len(current_events), battleNumber=battleNumber, bestTeams=bestTeams, bestSolo=bestSolo, eventProgress=progress, hours=hours, minutes=minutes)
+	return render_template('currentMeta.html', title="Current", current_events=current_events, len=len(current_events), battleNumber=battleNumber, bestTeams=bestTeams, bestSolo=bestSolo, eventProgress=progress, hours=hours, minutes=minutes)
 
 @app.route("/currentMeta/<string:events>")
 def mode_map(events):
