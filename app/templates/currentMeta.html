@@ -188,14 +188,17 @@
 
 <script>
 
-const metaDiv = document.getElementById("metaDiv");
+//const metaDiv = document.getElementById("metaDiv");
 const soloButton = document.getElementById("currentButton");
+const metaDivFirst = document.querySelector('#metaDiv div:nth-child(-n+8)');
+const metaDivLast = document.querySelector('#metaDiv div:nth-child(8+n)');
+
 const normalLength = 8
 soloButton.onclick = function () {
   if (metaDiv.children.length > normalLength)
   {
-  metaDiv.children.slice(0, normalLength).style.display = "block";
-  metaDiv.children.slice(normalLength+1, metaDiv.length).style.display = "none";
+  metaDivFirst.style.display = "block";
+  metaDivLast.style.display = "none";
   }
   else
   {
@@ -209,8 +212,8 @@ const teamButton = document.getElementById("championshipButton");
 teamButton.onclick = function () {
   if (metaDiv.children.length > normalLength)
   {
-  metaDiv.children.slice(0, normalLength).style.display = "none";
-  metaDiv.children.slice(normalLength+1, metaDiv.length).style.display = "block";
+  metaDivFirst.style.display = "none";
+  metaDivLast.style.display = "block";
   }
   else
   {
